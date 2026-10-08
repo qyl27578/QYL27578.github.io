@@ -295,6 +295,9 @@
     </style>
 </head>
 <body>
+    <!-- ===== Audio Player (Hidden) ===== -->
+    <audio id="audioPlayer" src="assets/wangqing-niuroumian.flac" preload="metadata"></audio>
+
     <!-- ===== Navigation ===== -->
     <nav class="nav">
         <div class="nav-inner">
@@ -533,7 +536,7 @@
             <div class="now-playing">
                 <div class="now-playing-title-row">
                     <span class="now-playing-title" id="npTitle">忘情牛肉面 (DJ版)</span>
-                    <span class="quality-badge" id="npQuality">高品</span>
+                    <span class="quality-badge" id="npQuality">无损</span>
                 </div>
                 <div class="now-playing-artist" id="npArtist">马健涛</div>
                 <div class="now-playing-lyric" id="npLyric">
@@ -609,11 +612,12 @@
         const musicTitle = document.getElementById('musicTitle');
         const musicArtist = document.getElementById('musicArtist');
         const playlistItems = document.querySelectorAll('.playlist-item');
+        const audioPlayer = document.getElementById('audioPlayer');
         let isPlaying = false;
         let currentSongIndex = 0;
 
         const songs = [
-            { title: '忘情牛肉面 (DJ版)', artist: '马健涛', quality: '高品', lyric: '「忘情牛肉面，忘掉你的脸……」' }
+            { title: '忘情牛肉面 (DJ版)', artist: '马健涛', quality: '无损', lyric: '「忘情牛肉面，忘掉你的脸……」' }
         ];
 
         const npTitle = document.getElementById('npTitle');
@@ -654,13 +658,23 @@
         // 播放/暂停按钮
         musicPlayBtn.addEventListener('click', function(e) {
             e.stopPropagation();
-            isPlaying = !isPlaying;
-            musicPlayer.classList.toggle('playing', isPlaying);
             if (isPlaying) {
-                iconPlay.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+                audioPlayer.pause();
             } else {
-                iconPlay.innerHTML = '<path d="M8 5v14l11-7z"/>';
+                audioPlayer.play().catch(err => console.log('播放失败:', err));
             }
+        });
+
+        // 音频事件同步状态
+        audioPlayer.addEventListener('play', function() {
+            isPlaying = true;
+            musicPlayer.classList.add('playing');
+            iconPlay.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+        });
+        audioPlayer.addEventListener('pause', function() {
+            isPlaying = false;
+            musicPlayer.classList.remove('playing');
+            iconPlay.innerHTML = '<path d="M8 5v14l11-7z"/>';
         });
 
         // 点击播放器主体展开/收起播放列表
