@@ -532,34 +532,18 @@
             <!-- Now Playing Panel -->
             <div class="now-playing">
                 <div class="now-playing-title-row">
-                    <span class="now-playing-title" id="npTitle">使一颗心免于哀伤</span>
-                    <span class="quality-badge" id="npQuality">无损</span>
+                    <span class="now-playing-title" id="npTitle">忘情牛肉面 (DJ版)</span>
+                    <span class="quality-badge" id="npQuality">高品</span>
                 </div>
-                <div class="now-playing-artist" id="npArtist">知更鸟 / HOYO-MiX</div>
+                <div class="now-playing-artist" id="npArtist">马健涛</div>
                 <div class="now-playing-lyric" id="npLyric">
-                    "愿汝以此心，免于哀伤。"
+                    「忘情牛肉面，忘掉你的脸……」
                 </div>
             </div>
-            <div class="playlist-header">播放列表 (5)</div>
+            <div class="playlist-header">播放列表 (1)</div>
             <div class="playlist-item active" data-index="0">
-                <div class="playlist-item-title">使一颗心免于哀伤</div>
-                <div class="playlist-item-artist">知更鸟 / HOYO-MiX</div>
-            </div>
-            <div class="playlist-item" data-index="1">
                 <div class="playlist-item-title">忘情牛肉面 (DJ版)</div>
                 <div class="playlist-item-artist">马健涛</div>
-            </div>
-            <div class="playlist-item" data-index="2">
-                <div class="playlist-item-title">In the House, in a Heartbeat</div>
-                <div class="playlist-item-artist">John Murphy</div>
-            </div>
-            <div class="playlist-item" data-index="3">
-                <div class="playlist-item-title">Luv Letter</div>
-                <div class="playlist-item-artist">Dj Okawari</div>
-            </div>
-            <div class="playlist-item" data-index="4">
-                <div class="playlist-item-title">Summertime</div>
-                <div class="playlist-item-artist">Cinnamons × Evening Cinema</div>
             </div>
         </div>
 
@@ -569,8 +553,8 @@
             </svg>
         </div>
         <div class="music-info">
-            <span class="music-title" id="musicTitle">使一颗心免于哀伤</span>
-            <span class="music-artist" id="musicArtist">知更鸟 / HOYO-MiX</span>
+            <span class="music-title" id="musicTitle">忘情牛肉面 (DJ版)</span>
+            <span class="music-artist" id="musicArtist">马健涛</span>
         </div>
         <button class="music-play-btn" id="musicPlayBtn">
             <svg id="iconPlay" viewBox="0 0 24 24" fill="currentColor">
@@ -629,11 +613,7 @@
         let currentSongIndex = 0;
 
         const songs = [
-            { title: '使一颗心免于哀伤', artist: '知更鸟 / HOYO-MiX', quality: '无损', lyric: '"愿汝以此心，免于哀伤。"' },
-            { title: '忘情牛肉面 (DJ版)', artist: '马健涛', quality: '高品', lyric: '「忘情牛肉面，忘掉你的脸……」' },
-            { title: 'In the House, in a Heartbeat', artist: 'John Murphy', quality: '无损', lyric: '...ring ring ring...' },
-            { title: 'Luv Letter', artist: 'Dj Okawari', quality: '高品', lyric: '❤ ♪ Love Letter ♪ ❤' },
-            { title: 'Summertime', artist: 'Cinnamons × Evening Cinema', quality: '无损', lyric: '「君と夏の終わり 将来の夢」' }
+            { title: '忘情牛肉面 (DJ版)', artist: '马健涛', quality: '高品', lyric: '「忘情牛肉面，忘掉你的脸……」' }
         ];
 
         const npTitle = document.getElementById('npTitle');
