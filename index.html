@@ -1,32 +1,52 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Milk King's Blog</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐮</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%237c6aa8'/><text x='50' y='65' font-size='48' text-anchor='middle' fill='white' font-family='sans-serif'>奶</text></svg>">
     <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap">
     <style>
-        /* ===== CSS Reset & Base ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
+        /* ===== CSS Variables ===== */
+        :root[data-theme="light"] {
             --bg-primary: #f8f9fc;
             --bg-card: #ffffff;
+            --bg-nav: rgba(248, 249, 252, 0.85);
             --text-primary: #1a1a2e;
             --text-secondary: #6b7280;
             --text-muted: #9ca3af;
             --accent: #7c6aa8;
+            --accent-hover: #6a5a96;
             --accent-light: #ede9f7;
             --border: #e5e7eb;
             --shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-            --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.08);
-            --radius: 16px;
-            --radius-sm: 10px;
+            --shadow-hover: 0 12px 32px rgba(124, 106, 168, 0.12);
+            --tag-bg: #f3f4f6;
+            --gradient-hero: linear-gradient(135deg, #7c6aa8 0%, #a89bd4 50%, #c4b8e8 100%);
+        }
+
+        :root[data-theme="dark"] {
+            --bg-primary: #0f0f1a;
+            --bg-card: #1a1a2e;
+            --bg-nav: rgba(15, 15, 26, 0.85);
+            --text-primary: #e8e8f0;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent: #a89bd4;
+            --accent-hover: #b8abe8;
+            --accent-light: rgba(168, 155, 212, 0.15);
+            --border: #2d2d44;
+            --shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+            --shadow-hover: 0 12px 32px rgba(168, 155, 212, 0.15);
+            --tag-bg: #252540;
+            --gradient-hero: linear-gradient(135deg, #a89bd4 0%, #7c6aa8 50%, #5a4d8a 100%);
+        }
+
+        /* ===== Reset ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
@@ -35,6 +55,7 @@
             color: var(--text-primary);
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* ===== Navigation ===== */
@@ -42,9 +63,10 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(248, 249, 252, 0.85);
-            backdrop-filter: blur(12px);
+            background: var(--bg-nav);
+            backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .nav-inner {
@@ -57,6 +79,12 @@
             justify-content: space-between;
         }
 
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         .nav-logo {
             font-family: 'Noto Serif SC', serif;
             font-size: 20px;
@@ -65,30 +93,32 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            transition: color 0.2s ease;
         }
 
         .nav-logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--accent), #a89bd4);
-            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            background: var(--gradient-hero);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 16px;
+            font-weight: 700;
         }
 
         .nav-menu {
             display: flex;
-            gap: 8px;
+            gap: 4px;
             list-style: none;
         }
 
         .nav-menu a {
-            padding: 8px 16px;
-            border-radius: var(--radius-sm);
+            padding: 8px 14px;
+            border-radius: 8px;
             text-decoration: none;
             color: var(--text-secondary);
             font-size: 14px;
@@ -102,17 +132,60 @@
             background: var(--accent-light);
         }
 
-        /* ===== Main Container ===== */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ===== Theme Toggle ===== */
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .theme-toggle svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ===== Container ===== */
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 40px 24px 80px;
         }
 
-        /* ===== Hero Section ===== */
+        /* ===== Hero ===== */
         .hero {
             text-align: center;
             padding: 60px 0 48px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-avatar {
@@ -120,14 +193,20 @@
             height: 120px;
             border-radius: 50%;
             margin: 0 auto 24px;
-            background: linear-gradient(135deg, var(--accent), #a89bd4);
+            background: var(--gradient-hero);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 48px;
             color: white;
             box-shadow: var(--shadow);
-            border: 4px solid white;
+            border: 4px solid var(--bg-card);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hero-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-hover);
         }
 
         .hero-title {
@@ -138,11 +217,51 @@
             letter-spacing: -0.5px;
         }
 
+        .hero-title .accent {
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         .hero-subtitle {
             font-size: 16px;
             color: var(--text-secondary);
             max-width: 480px;
             margin: 0 auto;
+        }
+
+        .hero-social {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .social-icon svg {
+            width: 18px;
+            height: 18px;
         }
 
         .hero-tags {
@@ -155,11 +274,16 @@
 
         .hero-tag {
             padding: 6px 14px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
+            background: var(--tag-bg);
             border-radius: 20px;
             font-size: 13px;
             color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .hero-tag:hover {
+            background: var(--accent-light);
+            color: var(--accent);
         }
 
         /* ===== Section Title ===== */
@@ -190,23 +314,43 @@
         .post-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: var(--radius);
+            border-radius: 16px;
             padding: 24px;
             transition: all 0.25s ease;
             cursor: pointer;
+            animation: fadeInUp 0.6s ease backwards;
         }
+
+        .post-card:nth-child(1) { animation-delay: 0.1s; }
+        .post-card:nth-child(2) { animation-delay: 0.2s; }
+        .post-card:nth-child(3) { animation-delay: 0.3s; }
+        .post-card:nth-child(4) { animation-delay: 0.4s; }
 
         .post-card:hover {
             box-shadow: var(--shadow-hover);
             transform: translateY(-2px);
-            border-color: var(--accent-light);
+            border-color: var(--accent);
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
         }
 
         .post-date {
             font-size: 13px;
             color: var(--text-muted);
-            margin-bottom: 8px;
             font-variant-numeric: tabular-nums;
+        }
+
+        .post-category {
+            font-size: 12px;
+            padding: 2px 8px;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 6px;
         }
 
         .post-title {
@@ -215,6 +359,11 @@
             font-weight: 600;
             margin-bottom: 8px;
             color: var(--text-primary);
+            transition: color 0.2s ease;
+        }
+
+        .post-card:hover .post-title {
+            color: var(--accent);
         }
 
         .post-excerpt {
@@ -233,9 +382,34 @@
         .post-tag {
             font-size: 12px;
             padding: 3px 10px;
+            background: var(--tag-bg);
+            color: var(--text-secondary);
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .post-tag:hover {
             background: var(--accent-light);
             color: var(--accent);
-            border-radius: 12px;
+        }
+
+        /* ===== About Section ===== */
+        .about-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 24px;
+        }
+
+        .about-text {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .about-text strong {
+            color: var(--text-primary);
         }
 
         /* ===== Footer ===== */
@@ -246,6 +420,15 @@
             font-size: 13px;
             border-top: 1px solid var(--border);
             margin-top: 60px;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--accent);
         }
 
         /* ===== Responsive ===== */
@@ -263,6 +446,9 @@
             .post-card {
                 padding: 18px;
             }
+            .about-card {
+                padding: 24px;
+            }
         }
     </style>
 </head>
@@ -270,16 +456,33 @@
     <!-- ===== Navigation ===== -->
     <nav class="nav">
         <div class="nav-inner">
-            <a href="/" class="nav-logo">
-                <span class="nav-logo-icon">M</span>
-                Milk King
-            </a>
-            <ul class="nav-menu">
-                <li><a href="#" class="active">首页</a></li>
-                <li><a href="#">归档</a></li>
-                <li><a href="#">标签</a></li>
-                <li><a href="#">关于</a></li>
-            </ul>
+            <div class="nav-left">
+                <a href="/" class="nav-logo">
+                    <span class="nav-logo-icon">奶</span>
+                    Milk King
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">归档</a></li>
+                    <li><a href="#">标签</a></li>
+                    <li><a href="#">关于</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+                    <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -288,10 +491,28 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-avatar">奶</div>
-            <h1 class="hero-title">Hello, I'm Milk King.</h1>
+            <h1 class="hero-title">Hello, I'm <span class="accent">Milk King</span>.</h1>
             <p class="hero-subtitle">
                 记录生活，分享技术。这里是奶王的个人博客，写点代码，聊点日常。
             </p>
+            <div class="hero-social">
+                <a href="https://github.com/QYL27578" class="social-icon" target="_blank" title="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="mailto:QYL27578@users.noreply.github.com" class="social-icon" title="邮箱">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+                <a href="#" class="social-icon" title="B站">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.738v7.226c-.036 1.489-.556 2.743-1.56 3.738-1.004.995-2.263 1.52-3.773 1.574H5.333c-1.51-.055-2.769-.579-3.773-1.574C.556 19.934.036 18.68 0 17.191V9.966c.036-1.489.556-2.743 1.56-3.738 1.004-.996 2.263-1.52 3.773-1.574h.774l-1.17-1.12a1.234 1.234 0 0 1 0-1.764 1.28 1.28 0 0 1 1.794 0l3.52 3.364h4.446l3.52-3.364a1.28 1.28 0 0 1 1.794 0 1.234 1.234 0 0 1 0 1.764l-1.2 1.12zm.08 1.893H5.333c-.992.036-1.82.359-2.484.968-.664.61-.996 1.435-.996 2.405v7.198c0 .97.332 1.795.996 2.405.664.609 1.492.932 2.484.968h12.56c.992-.036 1.82-.359 2.484-.968.664-.61.996-1.436.996-2.405V9.919c0-.97-.332-1.796-.996-2.405-.664-.609-1.492-.932-2.484-.968zM8.456 13.05c.76 0 1.374.614 1.374 1.374v1.142c0 .76-.614 1.374-1.374 1.374a1.371 1.371 0 0 1-1.374-1.374v-1.142c0-.76.614-1.374 1.374-1.374zm7.088 0c.76 0 1.374.614 1.374 1.374v1.142c0 .76-.614 1.374-1.374 1.374a1.371 1.371 0 0 1-1.374-1.374v-1.142c0-.76.614-1.374 1.374-1.374z"/>
+                    </svg>
+                </a>
+            </div>
             <div class="hero-tags">
                 <span class="hero-tag">通信工程</span>
                 <span class="hero-tag">嵌入式</span>
@@ -304,66 +525,100 @@
         <h2 class="section-title">最新文章</h2>
         <div class="post-list">
             <article class="post-card">
-                <div class="post-date">2026-10-08</div>
+                <div class="post-meta">
+                    <span class="post-date">2026-10-08</span>
+                    <span class="post-category">FPGA</span>
+                </div>
                 <h3 class="post-title">PCM1808 ADC 采集调试笔记</h3>
                 <p class="post-excerpt">
                     基于 Quartus II 13.0 和 EP4CE6F17C8N，用 Verilog 驱动 PCM1808 采集 IEPE 振动传感器信号的完整流程，包含时序图和踩坑记录。
                 </p>
                 <div class="post-tags">
-                    <span class="post-tag">FPGA</span>
                     <span class="post-tag">Verilog</span>
                     <span class="post-tag">ADC</span>
+                    <span class="post-tag">IEPE</span>
                 </div>
             </article>
 
             <article class="post-card">
-                <div class="post-date">2026-09-28</div>
+                <div class="post-meta">
+                    <span class="post-date">2026-09-28</span>
+                    <span class="post-category">FPGA</span>
+                </div>
                 <h3 class="post-title">VGA 显示波形实现方案</h3>
                 <p class="post-excerpt">
                     从 VGA 时序参数计算，到 DDR 缓存读写，再到前端波形绘制，一步步实现 FPGA 驱动 VGA 屏实时显示采集信号。
                 </p>
                 <div class="post-tags">
-                    <span class="post-tag">FPGA</span>
                     <span class="post-tag">VGA</span>
                     <span class="post-tag">数字图像处理</span>
                 </div>
             </article>
 
             <article class="post-card">
-                <div class="post-date">2026-09-15</div>
+                <div class="post-meta">
+                    <span class="post-date">2026-09-15</span>
+                    <span class="post-category">考研</span>
+                </div>
                 <h3 class="post-title">考研复习：移动通信原理重点梳理</h3>
                 <p class="post-excerpt">
                     整理移动通信原理课程的核心考点：功率计算、路径损耗、多径效应、CDMA 与 OFDM 技术对比。
                 </p>
                 <div class="post-tags">
-                    <span class="post-tag">考研</span>
                     <span class="post-tag">移动通信</span>
                     <span class="post-tag">复习笔记</span>
                 </div>
             </article>
 
             <article class="post-card">
-                <div class="post-date">2026-08-30</div>
+                <div class="post-meta">
+                    <span class="post-date">2026-08-30</span>
+                    <span class="post-category">单片机</span>
+                </div>
                 <h3 class="post-title">Keil C51 单片机课程设计记录</h3>
                 <p class="post-excerpt">
                     基于 8051 单片机的温度监测系统设计，包含 Proteus 仿真、DS18B20 驱动、数码管显示和串口通信。
                 </p>
                 <div class="post-tags">
-                    <span class="post-tag">单片机</span>
                     <span class="post-tag">Keil</span>
                     <span class="post-tag">课程设计</span>
                 </div>
             </article>
         </div>
 
+        <!-- About Section -->
+        <h2 class="section-title">关于我</h2>
+        <div class="about-card">
+            <p class="about-text">
+                你好，我是<strong>奶王</strong>，洛阳理工学院通信工程专业在读学生。
+                喜欢折腾硬件，平时玩 FPGA、单片机，偶尔写写博客记录学习过程。
+                目前在准备考研，方向是电子信息类。
+            </p>
+        </div>
+
         <!-- Footer -->
         <footer class="footer">
-            <p>© 2026 Milk King · Built with ♥ and HTML</p>
+            <p>© 2026 Milk King · <a href="https://github.com/QYL27578" target="_blank">GitHub</a></p>
         </footer>
     </main>
 
     <script>
-        // 导航栏切换交互
+        // ===== Theme Toggle =====
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // 初始化主题（从 localStorage 读取）
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // ===== Navigation =====
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -372,7 +627,7 @@
             });
         });
 
-        // 文章卡片点击提示
+        // ===== Post Card Click =====
         document.querySelectorAll('.post-card').forEach(card => {
             card.addEventListener('click', function() {
                 const title = this.querySelector('.post-title').textContent;
