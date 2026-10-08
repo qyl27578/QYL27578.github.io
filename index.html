@@ -227,6 +227,30 @@
         }
         .music-play-btn svg { width: 12px; height: 12px; }
 
+        /* ===== Playlist Dropdown ===== */
+        .playlist {
+            position: absolute; bottom: calc(100% + 12px); right: 0;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 14px; box-shadow: var(--shadow-hover);
+            width: 260px; max-height: 280px; overflow-y: auto;
+            opacity: 0; visibility: hidden; transform: translateY(8px);
+            transition: all 0.25s ease; z-index: 10;
+        }
+        .music-player.open .playlist {
+            opacity: 1; visibility: visible; transform: translateY(0);
+        }
+        .playlist-header {
+            padding: 12px 16px; font-size: 12px; font-weight: 600;
+            color: var(--text-muted); border-bottom: 1px solid var(--border);
+        }
+        .playlist-item {
+            padding: 10px 16px; cursor: pointer; transition: background 0.15s ease;
+        }
+        .playlist-item:hover { background: var(--accent-light); }
+        .playlist-item.active { background: var(--accent-light); }
+        .playlist-item-title { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+        .playlist-item-artist { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
         /* ===== Footer ===== */
         .footer {
             text-align: center; padding: 40px 0; color: var(--text-muted);
@@ -480,14 +504,35 @@
 
     <!-- ===== Music Player (Floating) ===== -->
     <div class="music-player" id="musicPlayer">
+        <!-- Playlist Dropdown -->
+        <div class="playlist" id="playlist">
+            <div class="playlist-header">播放列表 (4)</div>
+            <div class="playlist-item active" data-index="0">
+                <div class="playlist-item-title">使一颗心免于哀伤</div>
+                <div class="playlist-item-artist">知更鸟 / HOYO-MiX</div>
+            </div>
+            <div class="playlist-item" data-index="1">
+                <div class="playlist-item-title">In the House, in a Heartbeat</div>
+                <div class="playlist-item-artist">John Murphy</div>
+            </div>
+            <div class="playlist-item" data-index="2">
+                <div class="playlist-item-title">Luv Letter</div>
+                <div class="playlist-item-artist">Dj Okawari</div>
+            </div>
+            <div class="playlist-item" data-index="3">
+                <div class="playlist-item-title">Summertime</div>
+                <div class="playlist-item-artist">Cinnamons × Evening Cinema</div>
+            </div>
+        </div>
+
         <div class="music-disc">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
             </svg>
         </div>
         <div class="music-info">
-            <span class="music-title">使一颗心免于哀伤</span>
-            <span class="music-artist">知更鸟 / HOYO-MiX</span>
+            <span class="music-title" id="musicTitle">使一颗心免于哀伤</span>
+            <span class="music-artist" id="musicArtist">知更鸟 / HOYO-MiX</span>
         </div>
         <button class="music-play-btn" id="musicPlayBtn">
             <svg id="iconPlay" viewBox="0 0 24 24" fill="currentColor">
@@ -535,12 +580,33 @@
             switchView(initialView);
         }
 
-        // ===== Music Player Toggle =====
+        // ===== Music Player =====
         const musicPlayer = document.getElementById('musicPlayer');
         const musicPlayBtn = document.getElementById('musicPlayBtn');
         const iconPlay = document.getElementById('iconPlay');
+        const musicTitle = document.getElementById('musicTitle');
+        const musicArtist = document.getElementById('musicArtist');
+        const playlistItems = document.querySelectorAll('.playlist-item');
         let isPlaying = false;
+        let currentSongIndex = 0;
 
+        const songs = [
+            { title: '使一颗心免于哀伤', artist: '知更鸟 / HOYO-MiX' },
+            { title: 'In the House, in a Heartbeat', artist: 'John Murphy' },
+            { title: 'Luv Letter', artist: 'Dj Okawari' },
+            { title: 'Summertime', artist: 'Cinnamons × Evening Cinema' }
+        ];
+
+        function loadSong(index) {
+            currentSongIndex = index;
+            musicTitle.textContent = songs[index].title;
+            musicArtist.textContent = songs[index].artist;
+            playlistItems.forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+        }
+
+        // 播放/暂停按钮
         musicPlayBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             isPlaying = !isPlaying;
@@ -549,6 +615,33 @@
                 iconPlay.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
             } else {
                 iconPlay.innerHTML = '<path d="M8 5v14l11-7z"/>';
+            }
+        });
+
+        // 点击播放器主体展开/收起播放列表
+        musicPlayer.addEventListener('click', function() {
+            this.classList.toggle('open');
+        });
+
+        // 点击播放列表里的歌曲
+        playlistItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const index = parseInt(this.dataset.index);
+                loadSong(index);
+                // 自动开始播放
+                if (!isPlaying) {
+                    isPlaying = true;
+                    musicPlayer.classList.add('playing');
+                    iconPlay.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+                }
+            });
+        });
+
+        // 点击页面其他地方收起播放列表
+        document.addEventListener('click', function(e) {
+            if (!musicPlayer.contains(e.target)) {
+                musicPlayer.classList.remove('open');
             }
         });
 
