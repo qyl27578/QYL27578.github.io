@@ -4,50 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Milk King's Blog</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%237c6aa8'/><text x='50' y='65' font-size='48' text-anchor='middle' fill='white' font-family='sans-serif'>奶</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%235b8a72'/><text x='50' y='65' font-size='48' text-anchor='middle' fill='white' font-family='sans-serif'>奶</text></svg>">
     <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap">
     <style>
         /* ===== CSS Variables ===== */
         :root[data-theme="light"] {
-            --bg-primary: #f8f9fc;
+            --bg-primary: #f7f9f8;
             --bg-card: #ffffff;
-            --bg-nav: rgba(248, 249, 252, 0.85);
-            --text-primary: #1a1a2e;
+            --bg-nav: rgba(247, 249, 248, 0.85);
+            --text-primary: #1f2937;
             --text-secondary: #6b7280;
             --text-muted: #9ca3af;
-            --accent: #7c6aa8;
-            --accent-hover: #6a5a96;
-            --accent-light: #ede9f7;
+            --accent: #5b8a72;
+            --accent-hover: #4a7560;
+            --accent-light: #e8f0ec;
             --border: #e5e7eb;
             --shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-            --shadow-hover: 0 12px 32px rgba(124, 106, 168, 0.12);
+            --shadow-hover: 0 12px 32px rgba(91, 138, 114, 0.12);
             --tag-bg: #f3f4f6;
-            --gradient-hero: linear-gradient(135deg, #7c6aa8 0%, #a89bd4 50%, #c4b8e8 100%);
+            --gradient: linear-gradient(135deg, #5b8a72 0%, #7ba890 50%, #9cc4ad 100%);
         }
 
         :root[data-theme="dark"] {
-            --bg-primary: #0f0f1a;
-            --bg-card: #1a1a2e;
-            --bg-nav: rgba(15, 15, 26, 0.85);
-            --text-primary: #e8e8f0;
+            --bg-primary: #0f1410;
+            --bg-card: #1a2420;
+            --bg-nav: rgba(15, 20, 16, 0.85);
+            --text-primary: #e5e7eb;
             --text-secondary: #9ca3af;
             --text-muted: #6b7280;
-            --accent: #a89bd4;
-            --accent-hover: #b8abe8;
-            --accent-light: rgba(168, 155, 212, 0.15);
-            --border: #2d2d44;
+            --accent: #7ba890;
+            --accent-hover: #8db8a0;
+            --accent-light: rgba(123, 168, 144, 0.15);
+            --border: #2d3a34;
             --shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
-            --shadow-hover: 0 12px 32px rgba(168, 155, 212, 0.15);
-            --tag-bg: #252540;
-            --gradient-hero: linear-gradient(135deg, #a89bd4 0%, #7c6aa8 50%, #5a4d8a 100%);
+            --shadow-hover: 0 12px 32px rgba(123, 168, 144, 0.15);
+            --tag-bg: #25332d;
+            --gradient: linear-gradient(135deg, #7ba890 0%, #5b8a72 50%, #3d6b54 100%);
         }
 
         /* ===== Reset ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -60,395 +56,194 @@
 
         /* ===== Navigation ===== */
         .nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            position: sticky; top: 0; z-index: 100;
             background: var(--bg-nav);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
-
         .nav-inner {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 24px;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            max-width: 860px; margin: 0 auto; padding: 0 24px; height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
         }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
+        .nav-left { display: flex; align-items: center; gap: 24px; }
         .nav-logo {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: color 0.2s ease;
+            font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700;
+            color: var(--text-primary); text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
         }
-
         .nav-logo-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--gradient-hero);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 16px;
-            font-weight: 700;
+            width: 36px; height: 36px; background: var(--gradient);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 16px; font-weight: 700;
         }
-
-        .nav-menu {
-            display: flex;
-            gap: 4px;
-            list-style: none;
-        }
-
+        .nav-menu { display: flex; gap: 4px; list-style: none; }
         .nav-menu a {
-            padding: 8px 14px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s ease;
+            padding: 8px 14px; border-radius: 8px; text-decoration: none;
+            color: var(--text-secondary); font-size: 14px; font-weight: 500;
+            transition: all 0.2s ease; cursor: pointer;
         }
-
-        .nav-menu a:hover,
-        .nav-menu a.active {
-            color: var(--accent);
-            background: var(--accent-light);
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--accent); background: var(--accent-light);
         }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* ===== Theme Toggle ===== */
+        .nav-right { display: flex; align-items: center; gap: 8px; }
         .theme-toggle {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            background: var(--bg-card);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            transition: all 0.2s ease;
+            width: 40px; height: 40px; border-radius: 10px;
+            border: 1px solid var(--border); background: var(--bg-card);
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            color: var(--text-secondary); transition: all 0.2s ease;
         }
-
-        .theme-toggle:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .theme-toggle svg {
-            width: 18px;
-            height: 18px;
-        }
+        .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+        .theme-toggle svg { width: 18px; height: 18px; }
 
         /* ===== Container ===== */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 24px 80px;
-        }
+        .container { max-width: 860px; margin: 0 auto; padding: 40px 24px 120px; }
+
+        /* ===== Views ===== */
+        .view { display: none; animation: fadeIn 0.4s ease; }
+        .view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* ===== Hero ===== */
-        .hero {
-            text-align: center;
-            padding: 60px 0 48px;
-            animation: fadeInUp 0.6s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        .hero { text-align: center; padding: 48px 0 40px; }
         .hero-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 auto 24px;
-            background: var(--gradient-hero);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            color: white;
-            box-shadow: var(--shadow);
+            width: 110px; height: 110px; border-radius: 50%;
+            margin: 0 auto 20px; background: var(--gradient);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 44px; color: white; box-shadow: var(--shadow);
             border: 4px solid var(--bg-card);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease;
         }
-
-        .hero-avatar:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-hover);
-        }
-
+        .hero-avatar:hover { transform: scale(1.05); }
         .hero-title {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
+            font-family: 'Noto Serif SC', serif; font-size: 32px; font-weight: 700;
+            margin-bottom: 10px; letter-spacing: -0.5px;
         }
-
         .hero-title .accent {
-            background: var(--gradient-hero);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-
-        .hero-subtitle {
-            font-size: 16px;
-            color: var(--text-secondary);
-            max-width: 480px;
-            margin: 0 auto;
-        }
-
-        .hero-social {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 24px;
-        }
-
+        .hero-subtitle { font-size: 15px; color: var(--text-secondary); max-width: 460px; margin: 0 auto; }
+        .hero-social { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
         .social-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.2s ease;
+            width: 38px; height: 38px; border-radius: 50%;
+            background: var(--bg-card); border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-secondary); text-decoration: none; transition: all 0.2s ease;
         }
-
-        .social-icon:hover {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .social-icon svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        .hero-tags {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 24px;
-            flex-wrap: wrap;
-        }
-
+        .social-icon:hover { background: var(--accent); border-color: var(--accent); color: white; transform: translateY(-2px); }
+        .social-icon svg { width: 16px; height: 16px; }
+        .hero-tags { display: flex; justify-content: center; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
         .hero-tag {
-            padding: 6px 14px;
-            background: var(--tag-bg);
-            border-radius: 20px;
-            font-size: 13px;
-            color: var(--text-secondary);
-            transition: all 0.2s ease;
+            padding: 5px 12px; background: var(--tag-bg); border-radius: 20px;
+            font-size: 12px; color: var(--text-secondary); transition: all 0.2s ease;
         }
-
-        .hero-tag:hover {
-            background: var(--accent-light);
-            color: var(--accent);
-        }
+        .hero-tag:hover { background: var(--accent-light); color: var(--accent); }
 
         /* ===== Section Title ===== */
         .section-title {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 20px;
-            font-weight: 600;
-            margin: 48px 0 24px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 600;
+            margin: 40px 0 20px; display: flex; align-items: center; gap: 12px;
         }
-
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
+        .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
         /* ===== Post List ===== */
-        .post-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
+        .post-list { display: flex; flex-direction: column; gap: 14px; }
         .post-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 24px;
-            transition: all 0.25s ease;
-            cursor: pointer;
-            animation: fadeInUp 0.6s ease backwards;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 14px; padding: 20px 24px; transition: all 0.25s ease; cursor: pointer;
         }
-
-        .post-card:nth-child(1) { animation-delay: 0.1s; }
-        .post-card:nth-child(2) { animation-delay: 0.2s; }
-        .post-card:nth-child(3) { animation-delay: 0.3s; }
-        .post-card:nth-child(4) { animation-delay: 0.4s; }
-
-        .post-card:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-2px);
-            border-color: var(--accent);
-        }
-
-        .post-meta {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 8px;
-        }
-
-        .post-date {
-            font-size: 13px;
-            color: var(--text-muted);
-            font-variant-numeric: tabular-nums;
-        }
-
-        .post-category {
-            font-size: 12px;
-            padding: 2px 8px;
-            background: var(--accent-light);
-            color: var(--accent);
-            border-radius: 6px;
-        }
-
+        .post-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); border-color: var(--accent); }
+        .post-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+        .post-date { font-size: 12px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+        .post-category { font-size: 11px; padding: 2px 8px; background: var(--accent-light); color: var(--accent); border-radius: 6px; }
         .post-title {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-            transition: color 0.2s ease;
+            font-family: 'Noto Serif SC', serif; font-size: 17px; font-weight: 600;
+            margin-bottom: 6px; color: var(--text-primary); transition: color 0.2s ease;
         }
-
-        .post-card:hover .post-title {
-            color: var(--accent);
-        }
-
-        .post-excerpt {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .post-tags {
-            display: flex;
-            gap: 6px;
-            margin-top: 12px;
-            flex-wrap: wrap;
-        }
-
+        .post-card:hover .post-title { color: var(--accent); }
+        .post-excerpt { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+        .post-tags { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
         .post-tag {
-            font-size: 12px;
-            padding: 3px 10px;
-            background: var(--tag-bg);
-            color: var(--text-secondary);
-            border-radius: 12px;
-            transition: all 0.2s ease;
+            font-size: 11px; padding: 2px 8px; background: var(--tag-bg);
+            color: var(--text-secondary); border-radius: 10px; transition: all 0.2s ease;
         }
+        .post-tag:hover { background: var(--accent-light); color: var(--accent); }
 
-        .post-tag:hover {
-            background: var(--accent-light);
-            color: var(--accent);
+        /* ===== Archive View ===== */
+        .archive-year { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 600; margin: 32px 0 16px; color: var(--accent); }
+        .archive-item {
+            display: flex; align-items: baseline; gap: 16px; padding: 12px 0;
+            border-bottom: 1px solid var(--border); cursor: pointer; transition: all 0.2s ease;
         }
+        .archive-item:hover .archive-title { color: var(--accent); }
+        .archive-date { font-size: 13px; color: var(--text-muted); font-variant-numeric: tabular-nums; min-width: 90px; }
+        .archive-title { font-size: 15px; color: var(--text-primary); transition: color 0.2s ease; }
 
-        /* ===== About Section ===== */
+        /* ===== Tags View ===== */
+        .tags-cloud { display: flex; flex-wrap: wrap; gap: 10px; padding: 20px 0; }
+        .cloud-tag {
+            padding: 8px 16px; background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 20px; cursor: pointer; transition: all 0.2s ease;
+            font-size: 14px; color: var(--text-secondary);
+        }
+        .cloud-tag:hover { background: var(--accent); border-color: var(--accent); color: white; transform: translateY(-2px); }
+        .cloud-tag.lg { font-size: 16px; padding: 10px 20px; }
+        .cloud-tag.sm { font-size: 12px; padding: 6px 12px; }
+
+        /* ===== About View ===== */
         .about-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            margin-top: 24px;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 32px;
         }
+        .about-text { font-size: 15px; color: var(--text-secondary); line-height: 1.9; margin-bottom: 16px; }
+        .about-text strong { color: var(--text-primary); }
+        .about-section { margin-top: 24px; }
+        .about-section h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text-primary); }
+        .skill-list { display: flex; flex-wrap: wrap; gap: 8px; }
 
-        .about-text {
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.8;
+        /* ===== Music Player ===== */
+        .music-player {
+            position: fixed; bottom: 24px; right: 24px; z-index: 90;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 50px; padding: 10px 16px 10px 10px;
+            box-shadow: var(--shadow-hover); display: flex; align-items: center; gap: 12px;
+            transition: all 0.3s ease; cursor: pointer;
         }
-
-        .about-text strong {
-            color: var(--text-primary);
+        .music-player:hover { transform: translateY(-2px); }
+        .music-disc {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: var(--gradient); display: flex; align-items: center; justify-content: center;
+            color: white; animation: rotate 4s linear infinite; animation-play-state: paused;
         }
+        .music-player.playing .music-disc { animation-play-state: running; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .music-info { display: flex; flex-direction: column; }
+        .music-title { font-size: 12px; font-weight: 500; color: var(--text-primary); }
+        .music-artist { font-size: 11px; color: var(--text-muted); }
+        .music-play-btn {
+            width: 28px; height: 28px; border-radius: 50%; border: none;
+            background: var(--accent); color: white; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .music-play-btn svg { width: 12px; height: 12px; }
 
         /* ===== Footer ===== */
         .footer {
-            text-align: center;
-            padding: 40px 0;
-            color: var(--text-muted);
-            font-size: 13px;
-            border-top: 1px solid var(--border);
-            margin-top: 60px;
+            text-align: center; padding: 40px 0; color: var(--text-muted);
+            font-size: 13px; border-top: 1px solid var(--border); margin-top: 60px;
         }
-
-        .footer a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            color: var(--accent);
-        }
+        .footer a { color: var(--text-secondary); text-decoration: none; }
+        .footer a:hover { color: var(--accent); }
 
         /* ===== Responsive ===== */
         @media (max-width: 640px) {
-            .hero-title {
-                font-size: 28px;
-            }
-            .nav-menu a {
-                padding: 6px 10px;
-                font-size: 13px;
-            }
-            .container {
-                padding: 24px 16px 60px;
-            }
-            .post-card {
-                padding: 18px;
-            }
-            .about-card {
-                padding: 24px;
-            }
+            .hero-title { font-size: 26px; }
+            .nav-menu a { padding: 6px 10px; font-size: 13px; }
+            .container { padding: 24px 16px 100px; }
+            .post-card { padding: 16px 18px; }
+            .about-card { padding: 24px; }
+            .music-player { bottom: 16px; right: 16px; padding: 8px 12px 8px 8px; }
+            .music-info { display: none; }
         }
     </style>
 </head>
@@ -457,20 +252,20 @@
     <nav class="nav">
         <div class="nav-inner">
             <div class="nav-left">
-                <a href="/" class="nav-logo">
+                <a href="#home" class="nav-logo">
                     <span class="nav-logo-icon">奶</span>
                     Milk King
                 </a>
                 <ul class="nav-menu">
-                    <li><a href="#" class="active">首页</a></li>
-                    <li><a href="#">归档</a></li>
-                    <li><a href="#">标签</a></li>
-                    <li><a href="#">关于</a></li>
+                    <li><a href="#home" class="active" data-view="home">首页</a></li>
+                    <li><a href="#archive" data-view="archive">归档</a></li>
+                    <li><a href="#tags" data-view="tags">标签</a></li>
+                    <li><a href="#about" data-view="about">关于</a></li>
                 </ul>
             </div>
             <div class="nav-right">
                 <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
-                    <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
                         <line x1="12" y1="1" x2="12" y2="3"></line>
                         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -488,112 +283,193 @@
 
     <!-- ===== Main Content ===== -->
     <main class="container">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-avatar">奶</div>
-            <h1 class="hero-title">Hello, I'm <span class="accent">Milk King</span>.</h1>
-            <p class="hero-subtitle">
-                记录生活，分享技术。这里是奶王的个人博客，写点代码，聊点日常。
-            </p>
-            <div class="hero-social">
-                <a href="https://github.com/QYL27578" class="social-icon" target="_blank" title="GitHub">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                </a>
-                <a href="mailto:QYL27578@users.noreply.github.com" class="social-icon" title="邮箱">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                </a>
-                <a href="#" class="social-icon" title="B站">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.738v7.226c-.036 1.489-.556 2.743-1.56 3.738-1.004.995-2.263 1.52-3.773 1.574H5.333c-1.51-.055-2.769-.579-3.773-1.574C.556 19.934.036 18.68 0 17.191V9.966c.036-1.489.556-2.743 1.56-3.738 1.004-.996 2.263-1.52 3.773-1.574h.774l-1.17-1.12a1.234 1.234 0 0 1 0-1.764 1.28 1.28 0 0 1 1.794 0l3.52 3.364h4.446l3.52-3.364a1.28 1.28 0 0 1 1.794 0 1.234 1.234 0 0 1 0 1.764l-1.2 1.12zm.08 1.893H5.333c-.992.036-1.82.359-2.484.968-.664.61-.996 1.435-.996 2.405v7.198c0 .97.332 1.795.996 2.405.664.609 1.492.932 2.484.968h12.56c.992-.036 1.82-.359 2.484-.968.664-.61.996-1.436.996-2.405V9.919c0-.97-.332-1.796-.996-2.405-.664-.609-1.492-.932-2.484-.968zM8.456 13.05c.76 0 1.374.614 1.374 1.374v1.142c0 .76-.614 1.374-1.374 1.374a1.371 1.371 0 0 1-1.374-1.374v-1.142c0-.76.614-1.374 1.374-1.374zm7.088 0c.76 0 1.374.614 1.374 1.374v1.142c0 .76-.614 1.374-1.374 1.374a1.371 1.371 0 0 1-1.374-1.374v-1.142c0-.76.614-1.374 1.374-1.374z"/>
-                    </svg>
-                </a>
+
+        <!-- ========== 视图：首页 ========== -->
+        <div id="view-home" class="view active">
+            <section class="hero">
+                <div class="hero-avatar">奶</div>
+                <h1 class="hero-title">Hello, I'm <span class="accent">Milk King</span>.</h1>
+                <p class="hero-subtitle">
+                    记录生活，分享技术。这里是奶王的个人博客，写点代码，聊点日常。
+                </p>
+                <div class="hero-social">
+                    <a href="https://github.com/QYL27578" class="social-icon" target="_blank" title="GitHub">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:QYL27578@users.noreply.github.com" class="social-icon" title="邮箱">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" title="B站">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.738v7.226c-.036 1.489-.556 2.743-1.56 3.738-1.004.995-2.263 1.52-3.773 1.574H5.333c-1.51-.055-2.769-.579-3.773-1.574C.556 19.934.036 18.68 0 17.191V9.966c.036-1.489.556-2.743 1.56-3.738 1.004-.996 2.263-1.52 3.773-1.574h.774l-1.17-1.12a1.234 1.234 0 0 1 0-1.764 1.28 1.28 0 0 1 1.794 0l3.52 3.364h4.446l3.52-3.364a1.28 1.28 0 0 1 1.794 0 1.234 1.234 0 0 1 0 1.764l-1.2 1.12zm.08 1.893H5.333c-.992.036-1.82.359-2.484.968-.664.61-.996 1.435-.996 2.405v7.198c0 .97.332 1.795.996 2.405.664.609 1.492.932 2.484.968h12.56c.992-.036 1.82-.359 2.484-.968.664-.61.996-1.436.996-2.405V9.919c0-.97-.332-1.796-.996-2.405-.664-.609-1.492-.932-2.484-.968zM8.456 13.05c.76 0 1.374.614 1.374 1.374v1.142c0 .76-.614 1.374-1.374 1.374a1.371 1.371 0 0 1-1.374-1.374v-1.142c0-.76.614-1.374 1.374-1.374zm7.088 0c.76 0 1.374.614 1.374 1.374v1.142c0 .76-.614 1.374-1.374 1.374a1.371 1.371 0 0 1-1.374-1.374v-1.142c0-.76.614-1.374 1.374-1.374z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="hero-tags">
+                    <span class="hero-tag">通信工程</span>
+                    <span class="hero-tag">嵌入式</span>
+                    <span class="hero-tag">FPGA</span>
+                    <span class="hero-tag">考研</span>
+                </div>
+            </section>
+
+            <h2 class="section-title">最新文章</h2>
+            <div class="post-list">
+                <article class="post-card">
+                    <div class="post-meta">
+                        <span class="post-date">2026-10-08</span>
+                        <span class="post-category">FPGA</span>
+                    </div>
+                    <h3 class="post-title">PCM1808 ADC 采集调试笔记</h3>
+                    <p class="post-excerpt">
+                        基于 Quartus II 13.0 和 EP4CE6F17C8N，用 Verilog 驱动 PCM1808 采集 IEPE 振动传感器信号的完整流程，包含时序图和踩坑记录。
+                    </p>
+                    <div class="post-tags">
+                        <span class="post-tag">Verilog</span>
+                        <span class="post-tag">ADC</span>
+                        <span class="post-tag">IEPE</span>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-meta">
+                        <span class="post-date">2026-09-28</span>
+                        <span class="post-category">FPGA</span>
+                    </div>
+                    <h3 class="post-title">VGA 显示波形实现方案</h3>
+                    <p class="post-excerpt">
+                        从 VGA 时序参数计算，到 DDR 缓存读写，再到前端波形绘制，一步步实现 FPGA 驱动 VGA 屏实时显示采集信号。
+                    </p>
+                    <div class="post-tags">
+                        <span class="post-tag">VGA</span>
+                        <span class="post-tag">数字图像处理</span>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-meta">
+                        <span class="post-date">2026-09-15</span>
+                        <span class="post-category">考研</span>
+                    </div>
+                    <h3 class="post-title">考研复习：移动通信原理重点梳理</h3>
+                    <p class="post-excerpt">
+                        整理移动通信原理课程的核心考点：功率计算、路径损耗、多径效应、CDMA 与 OFDM 技术对比。
+                    </p>
+                    <div class="post-tags">
+                        <span class="post-tag">移动通信</span>
+                        <span class="post-tag">复习笔记</span>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-meta">
+                        <span class="post-date">2026-08-30</span>
+                        <span class="post-category">单片机</span>
+                    </div>
+                    <h3 class="post-title">Keil C51 单片机课程设计记录</h3>
+                    <p class="post-excerpt">
+                        基于 8051 单片机的温度监测系统设计，包含 Proteus 仿真、DS18B20 驱动、数码管显示和串口通信。
+                    </p>
+                    <div class="post-tags">
+                        <span class="post-tag">Keil</span>
+                        <span class="post-tag">课程设计</span>
+                    </div>
+                </article>
             </div>
-            <div class="hero-tags">
-                <span class="hero-tag">通信工程</span>
-                <span class="hero-tag">嵌入式</span>
-                <span class="hero-tag">FPGA</span>
-                <span class="hero-tag">考研</span>
-            </div>
-        </section>
-
-        <!-- Latest Posts -->
-        <h2 class="section-title">最新文章</h2>
-        <div class="post-list">
-            <article class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">2026-10-08</span>
-                    <span class="post-category">FPGA</span>
-                </div>
-                <h3 class="post-title">PCM1808 ADC 采集调试笔记</h3>
-                <p class="post-excerpt">
-                    基于 Quartus II 13.0 和 EP4CE6F17C8N，用 Verilog 驱动 PCM1808 采集 IEPE 振动传感器信号的完整流程，包含时序图和踩坑记录。
-                </p>
-                <div class="post-tags">
-                    <span class="post-tag">Verilog</span>
-                    <span class="post-tag">ADC</span>
-                    <span class="post-tag">IEPE</span>
-                </div>
-            </article>
-
-            <article class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">2026-09-28</span>
-                    <span class="post-category">FPGA</span>
-                </div>
-                <h3 class="post-title">VGA 显示波形实现方案</h3>
-                <p class="post-excerpt">
-                    从 VGA 时序参数计算，到 DDR 缓存读写，再到前端波形绘制，一步步实现 FPGA 驱动 VGA 屏实时显示采集信号。
-                </p>
-                <div class="post-tags">
-                    <span class="post-tag">VGA</span>
-                    <span class="post-tag">数字图像处理</span>
-                </div>
-            </article>
-
-            <article class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">2026-09-15</span>
-                    <span class="post-category">考研</span>
-                </div>
-                <h3 class="post-title">考研复习：移动通信原理重点梳理</h3>
-                <p class="post-excerpt">
-                    整理移动通信原理课程的核心考点：功率计算、路径损耗、多径效应、CDMA 与 OFDM 技术对比。
-                </p>
-                <div class="post-tags">
-                    <span class="post-tag">移动通信</span>
-                    <span class="post-tag">复习笔记</span>
-                </div>
-            </article>
-
-            <article class="post-card">
-                <div class="post-meta">
-                    <span class="post-date">2026-08-30</span>
-                    <span class="post-category">单片机</span>
-                </div>
-                <h3 class="post-title">Keil C51 单片机课程设计记录</h3>
-                <p class="post-excerpt">
-                    基于 8051 单片机的温度监测系统设计，包含 Proteus 仿真、DS18B20 驱动、数码管显示和串口通信。
-                </p>
-                <div class="post-tags">
-                    <span class="post-tag">Keil</span>
-                    <span class="post-tag">课程设计</span>
-                </div>
-            </article>
         </div>
 
-        <!-- About Section -->
-        <h2 class="section-title">关于我</h2>
-        <div class="about-card">
-            <p class="about-text">
-                你好，我是<strong>奶王</strong>，洛阳理工学院通信工程专业在读学生。
-                喜欢折腾硬件，平时玩 FPGA、单片机，偶尔写写博客记录学习过程。
-                目前在准备考研，方向是电子信息类。
-            </p>
+        <!-- ========== 视图：归档 ========== -->
+        <div id="view-archive" class="view">
+            <h2 class="section-title">文章归档</h2>
+            <div class="archive-year">2026</div>
+            <div class="archive-list">
+                <div class="archive-item">
+                    <span class="archive-date">10-08</span>
+                    <span class="archive-title">PCM1808 ADC 采集调试笔记</span>
+                </div>
+                <div class="archive-item">
+                    <span class="archive-date">09-28</span>
+                    <span class="archive-title">VGA 显示波形实现方案</span>
+                </div>
+                <div class="archive-item">
+                    <span class="archive-date">09-15</span>
+                    <span class="archive-title">考研复习：移动通信原理重点梳理</span>
+                </div>
+                <div class="archive-item">
+                    <span class="archive-date">08-30</span>
+                    <span class="archive-title">Keil C51 单片机课程设计记录</span>
+                </div>
+                <div class="archive-item">
+                    <span class="archive-date">07-20</span>
+                    <span class="archive-title">MATLAB 数字图像处理实验记录</span>
+                </div>
+                <div class="archive-item">
+                    <span class="archive-date">06-15</span>
+                    <span class="archive-title">STM32 入门：GPIO 与串口通信</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== 视图：标签 ========== -->
+        <div id="view-tags" class="view">
+            <h2 class="section-title">所有标签</h2>
+            <div class="tags-cloud">
+                <span class="cloud-tag lg">FPGA</span>
+                <span class="cloud-tag">Verilog</span>
+                <span class="cloud-tag lg">考研</span>
+                <span class="cloud-tag">单片机</span>
+                <span class="cloud-tag lg">通信工程</span>
+                <span class="cloud-tag">VGA</span>
+                <span class="cloud-tag">ADC</span>
+                <span class="cloud-tag">Keil</span>
+                <span class="cloud-tag lg">嵌入式</span>
+                <span class="cloud-tag">移动通信</span>
+                <span class="cloud-tag">数字图像处理</span>
+                <span class="cloud-tag">课程设计</span>
+                <span class="cloud-tag sm">STM32</span>
+                <span class="cloud-tag sm">MATLAB</span>
+                <span class="cloud-tag sm">Proteus</span>
+                <span class="cloud-tag sm">IEPE</span>
+                <span class="cloud-tag sm">复习笔记</span>
+                <span class="cloud-tag sm">Quartus</span>
+            </div>
+        </div>
+
+        <!-- ========== 视图：关于 ========== -->
+        <div id="view-about" class="view">
+            <h2 class="section-title">关于我</h2>
+            <div class="about-card">
+                <p class="about-text">
+                    你好，我是<strong>奶王</strong>，洛阳理工学院电子信息学院通信工程专业在读学生。
+                    喜欢折腾硬件，平时玩 FPGA、单片机，偶尔写写博客记录学习过程。
+                    目前在准备考研，方向是电子信息类。
+                </p>
+
+                <div class="about-section">
+                    <h3>技能栈</h3>
+                    <div class="skill-list">
+                        <span class="post-tag">Verilog / Quartus II</span>
+                        <span class="post-tag">C / Keil C51</span>
+                        <span class="post-tag">STM32</span>
+                        <span class="post-tag">Proteus</span>
+                        <span class="post-tag">MATLAB</span>
+                        <span class="post-tag">Python / OpenCV</span>
+                        <span class="post-tag">PCB 设计</span>
+                    </div>
+                </div>
+
+                <div class="about-section">
+                    <h3>正在做</h3>
+                    <p class="about-text">
+                        基于 FPGA 的振动信号缺陷检测系统设计，涵盖 PCM1808 ADC 采集、VGA 波形显示、数码管数据输出等模块。
+                    </p>
+                </div>
+            </div>
         </div>
 
         <!-- Footer -->
@@ -602,36 +478,84 @@
         </footer>
     </main>
 
+    <!-- ===== Music Player (Floating) ===== -->
+    <div class="music-player" id="musicPlayer">
+        <div class="music-disc">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+            </svg>
+        </div>
+        <div class="music-info">
+            <span class="music-title">使一颗心免于哀伤</span>
+            <span class="music-artist">知更鸟 / HOYO-MiX</span>
+        </div>
+        <button class="music-play-btn" id="musicPlayBtn">
+            <svg id="iconPlay" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+        </button>
+    </div>
+
     <script>
         // ===== Theme Toggle =====
         const themeToggle = document.getElementById('themeToggle');
         const html = document.documentElement;
-
-        // 初始化主题（从 localStorage 读取）
         const savedTheme = localStorage.getItem('theme') || 'light';
         html.setAttribute('data-theme', savedTheme);
-
         themeToggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
         });
 
-        // ===== Navigation =====
-        document.querySelectorAll('.nav-menu a').forEach(link => {
+        // ===== View Router (hash based) =====
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        const views = document.querySelectorAll('.view');
+
+        function switchView(viewName) {
+            views.forEach(v => v.classList.remove('active'));
+            navLinks.forEach(l => l.classList.remove('active'));
+            document.getElementById('view-' + viewName).classList.add('active');
+            document.querySelector(`.nav-menu a[data-view="${viewName}"]`).classList.add('active');
+        }
+
+        navLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                document.querySelectorAll('.nav-menu a').forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
+                const view = this.dataset.view;
+                switchView(view);
+                window.location.hash = view;
             });
         });
 
+        // 初始化：根据 hash 切换视图
+        const initialView = window.location.hash.replace('#', '') || 'home';
+        if (['home', 'archive', 'tags', 'about'].includes(initialView)) {
+            switchView(initialView);
+        }
+
+        // ===== Music Player Toggle =====
+        const musicPlayer = document.getElementById('musicPlayer');
+        const musicPlayBtn = document.getElementById('musicPlayBtn');
+        const iconPlay = document.getElementById('iconPlay');
+        let isPlaying = false;
+
+        musicPlayBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            isPlaying = !isPlaying;
+            musicPlayer.classList.toggle('playing', isPlaying);
+            if (isPlaying) {
+                iconPlay.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+            } else {
+                iconPlay.innerHTML = '<path d="M8 5v14l11-7z"/>';
+            }
+        });
+
         // ===== Post Card Click =====
-        document.querySelectorAll('.post-card').forEach(card => {
+        document.querySelectorAll('.post-card, .archive-item').forEach(card => {
             card.addEventListener('click', function() {
-                const title = this.querySelector('.post-title').textContent;
-                alert('《' + title + '》\n\n文章详情页开发中，敬请期待~');
+                alert('文章详情页开发中，敬请期待~');
             });
         });
     </script>
